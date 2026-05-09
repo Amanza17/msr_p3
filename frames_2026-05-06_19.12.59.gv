@@ -1,0 +1,31 @@
+digraph G {
+"scara_base_link" -> "brazo1_link"[label=" Broadcaster: default_authority\nAverage rate: 19.0\nBuffer length: 5.0\nMost recent transform: 33.05\nOldest transform: 28.05\n"];
+"base_link" -> "scara_base_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"brazo1_link" -> "brazo2_link"[label=" Broadcaster: default_authority\nAverage rate: 19.0\nBuffer length: 5.0\nMost recent transform: 33.05\nOldest transform: 28.05\n"];
+"brazo2_link" -> "paloquebaja_link"[label=" Broadcaster: default_authority\nAverage rate: 19.0\nBuffer length: 5.0\nMost recent transform: 33.05\nOldest transform: 28.05\n"];
+"paloquebaja_link" -> "pinza_base_link"[label=" Broadcaster: default_authority\nAverage rate: 19.0\nBuffer length: 5.0\nMost recent transform: 33.05\nOldest transform: 28.05\n"];
+"pinza_base_link" -> "pinza_d_link"[label=" Broadcaster: default_authority\nAverage rate: 19.0\nBuffer length: 5.0\nMost recent transform: 33.05\nOldest transform: 28.05\n"];
+"pinza_base_link" -> "pinza_i_link"[label=" Broadcaster: default_authority\nAverage rate: 19.0\nBuffer length: 5.0\nMost recent transform: 33.05\nOldest transform: 28.05\n"];
+"ia_link" -> "w1_link"[label=" Broadcaster: default_authority\nAverage rate: 19.0\nBuffer length: 5.0\nMost recent transform: 33.05\nOldest transform: 28.05\n"];
+"ig_link" -> "ia_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"ia_link" -> "w2_link"[label=" Broadcaster: default_authority\nAverage rate: 19.0\nBuffer length: 5.0\nMost recent transform: 33.05\nOldest transform: 28.05\n"];
+"ig_link" -> "w3_link"[label=" Broadcaster: default_authority\nAverage rate: 19.0\nBuffer length: 5.0\nMost recent transform: 33.05\nOldest transform: 28.05\n"];
+"base_link" -> "ig_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"da_link" -> "w4_link"[label=" Broadcaster: default_authority\nAverage rate: 19.0\nBuffer length: 5.0\nMost recent transform: 33.05\nOldest transform: 28.05\n"];
+"dg_link" -> "da_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"da_link" -> "w5_link"[label=" Broadcaster: default_authority\nAverage rate: 19.0\nBuffer length: 5.0\nMost recent transform: 33.05\nOldest transform: 28.05\n"];
+"dg_link" -> "w6_link"[label=" Broadcaster: default_authority\nAverage rate: 19.0\nBuffer length: 5.0\nMost recent transform: 33.05\nOldest transform: 28.05\n"];
+"base_link" -> "dg_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"pinza_base_link" -> "arm_camera_camera_frame"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"arm_camera_camera_frame" -> "arm_camera_optical_frame"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"base_footprint" -> "base_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"odom" -> "base_footprint"[label=" Broadcaster: default_authority\nAverage rate: 20.333\nBuffer length: 3.0\nMost recent transform: 33.05\nOldest transform: 30.05\n"];
+"base_link" -> "dejar_cosas_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"base_link" -> "front_camera_camera_frame"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"front_camera_camera_frame" -> "front_camera_optical_frame"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"base_link" -> "imu_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1778087579.803175"[ shape=plaintext ] ;
+}->"odom";
+}

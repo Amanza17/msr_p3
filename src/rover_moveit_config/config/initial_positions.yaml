@@ -1,0 +1,9 @@
+# Default initial positions for rover's ros2_control fake system
+
+initial_positions:
+  brazo1_link_joint: 0
+  brazo2_link_joint: 0
+  paloquebaja_link_joint: 0
+  pinza_base_link_joint: 0
+  pinza_d_link_joint: 0
+  pinza_i_link_joint: 0

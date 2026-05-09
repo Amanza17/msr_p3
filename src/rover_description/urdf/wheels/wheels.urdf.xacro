@@ -1,0 +1,245 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <xacro:property name="mesh_path" value="file://$(find rover_description)/meshes/dae"/>
+
+  <xacro:macro name="wheels" params="parent">
+
+    <!-- ===== dg_link ===== -->
+    <link name="dg_link">
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="1.0"/>
+        <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/>
+      </inertial>
+      <collision name="dg_collision">
+        <origin rpy="1.57022 0.00057 0.78540" xyz="0.33826 0.48007 0"/>
+        <geometry>
+          <mesh filename="${mesh_path}/Cube.006.dae" scale="0.10000 0.05000 0.50000"/>
+        </geometry>
+      </collision>
+      <visual name="dg">
+        <material name="Material.006"/>
+        <origin rpy="1.57080 0 0.78540" xyz="0.33826 0.48007 0"/>
+        <geometry>
+          <mesh filename="${mesh_path}/Cube.006.dae" scale="0.10000 0.05000 0.50000"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <joint name="dg_link_joint" type="fixed">
+      <origin rpy="-1.57080 0 0" xyz="-0.00646 0.55000 -0.03119"/>
+      <parent link="${parent}"/>
+      <child link="dg_link"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+
+    <!-- ===== da_link ===== -->
+    <link name="da_link">
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="1.0"/>
+        <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/>
+      </inertial>
+      <collision name="da_collision">
+        <origin rpy="1.56781 0.00276 0.75770" xyz="0 0.40000 0"/>
+        <geometry>
+          <mesh filename="${mesh_path}/Cube.003.dae" scale="0.10000 0.05000 0.62500"/>
+        </geometry>
+      </collision>
+      <visual name="da">
+        <material name="Material.006"/>
+        <origin rpy="1.57080 0 0.78540" xyz="0 0.40000 0"/>
+        <geometry>
+          <mesh filename="${mesh_path}/Cube.003.dae" scale="0.10000 0.05000 0.62500"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <joint name="da_link_joint" type="fixed">
+      <origin rpy="0 0 0" xyz="-0.62555 0.55000 0"/>
+      <parent link="dg_link"/>
+      <child link="da_link"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+
+    <!-- ===== ig_link ===== -->
+    <link name="ig_link">
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="1.0"/>
+        <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/>
+      </inertial>
+      <collision name="ig_collision">
+        <origin rpy="1.58255 0.01175 -0.78533" xyz="0.30796 0.46630 0"/>
+        <geometry>
+          <mesh filename="${mesh_path}/Cube.008.dae" scale="0.10000 0.05000 1.00000"/>
+        </geometry>
+      </collision>
+      <visual name="ig">
+        <material name="Material.006"/>
+        <origin rpy="1.57080 0 -0.78540" xyz="0.30796 0.46630 0"/>
+        <geometry>
+          <mesh filename="${mesh_path}/Cube.008.dae" scale="0.10000 0.05000 1.00000"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <joint name="ig_link_joint" type="fixed">
+      <origin rpy="-1.57080 0 0" xyz="0.02384 -0.55000 -0.04496"/>
+      <parent link="${parent}"/>
+      <child link="ig_link"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+
+    <!-- ===== ia_link ===== -->
+    <link name="ia_link">
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="1.0"/>
+        <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/>
+      </inertial>
+      <collision name="ia_collision">
+        <origin rpy="1.58505 -0.01425 0.78530" xyz="-0.02183 0.30251 -0.02720"/>
+        <geometry>
+          <mesh filename="${mesh_path}/Cube.001.dae" scale="0.10000 0.05000 0.62500"/>
+        </geometry>
+      </collision>
+      <visual name="ia">
+        <material name="Material.006"/>
+        <origin rpy="1.57080 0 0.78540" xyz="-0.02183 0.30251 -0.02720"/>
+        <geometry>
+          <mesh filename="${mesh_path}/Cube.001.dae" scale="0.10000 0.05000 0.62500"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <joint name="ia_link_joint" type="fixed">
+      <origin rpy="0 0 0" xyz="-0.63403 0.63372 0.02720"/>
+      <parent link="ig_link"/>
+      <child link="ia_link"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+
+    <!-- ===== wheels ===== -->
+    <!-- Repetimos mismo patrón -->
+
+    <link name="w1_link">
+      <inertial><origin xyz="0 0 0"/><mass value="1.0"/><inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/></inertial>
+      <collision name="w1_collision">
+        <origin rpy="-3.12433 0 0" xyz="0 0 0"/>
+        <geometry><mesh filename="${mesh_path}/Torus.dae" scale="0.40000 0.40000 0.60000"/></geometry>
+      </collision>
+      <visual name="w1">
+        <material name="Material.004"/>
+        <origin rpy="3.14159 0 0" xyz="0 0 0"/>
+        <geometry><mesh filename="${mesh_path}/Torus.dae" scale="0.40000 0.40000 0.60000"/></geometry>
+      </visual>
+    </link>
+
+    <joint name="w1_link_joint" type="continuous">
+      <origin xyz="-0.68264 0.65251 -0.22720"/>
+      <parent link="ia_link"/>
+      <child link="w1_link"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+
+    <!-- w2 -->
+    <link name="w2_link">
+      <inertial><origin xyz="0 0 0"/><mass value="1.0"/><inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/></inertial>
+      <collision name="w2_collision">
+        <origin rpy="3.09971 0 0"/>
+        <geometry><mesh filename="${mesh_path}/Torus.002.dae" scale="0.40000 0.40000 0.60000"/></geometry>
+      </collision>
+      <visual name="w2">
+        <material name="Material.004"/>
+        <geometry><mesh filename="${mesh_path}/Torus.002.dae" scale="0.40000 0.40000 0.60000"/></geometry>
+      </visual>
+    </link>
+
+    <joint name="w2_link_joint" type="continuous">
+      <origin xyz="0.70373 0.65251 -0.22720"/>
+      <parent link="ia_link"/>
+      <child link="w2_link"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+
+    <!-- w3 -->
+    <link name="w3_link">
+      <inertial><origin xyz="0 0 0"/><mass value="1.0"/><inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/></inertial>
+      <collision name="w3_collision">
+        <geometry><mesh filename="${mesh_path}/Torus.005.dae" scale="0.40000 0.40000 0.60000"/></geometry>
+      </collision>
+      <visual name="w3">
+        <material name="Material.004"/>
+        <geometry><mesh filename="${mesh_path}/Torus.005.dae" scale="0.40000 0.40000 0.60000"/></geometry>
+      </visual>
+    </link>
+
+    <joint name="w3_link_joint" type="continuous">
+      <origin xyz="1.25627 1.28624 -0.20000"/>
+      <parent link="ig_link"/>
+      <child link="w3_link"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+
+    <!-- w4 -->
+    <link name="w4_link">
+      <inertial><origin xyz="0 0 0"/><mass value="1.0"/><inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/></inertial>
+      <collision name="w4_collision">
+        <geometry><mesh filename="${mesh_path}/Torus.004.dae" scale="0.40000 0.40000 0.60000"/></geometry>
+      </collision>
+      <visual name="w4">
+        <material name="Material.004"/>
+        <geometry><mesh filename="${mesh_path}/Torus.004.dae" scale="0.40000 0.40000 0.60000"/></geometry>
+      </visual>
+    </link>
+
+    <joint name="w4_link_joint" type="continuous">
+      <origin xyz="-0.66085 0.75000 0.20000"/>
+      <parent link="da_link"/>
+      <child link="w4_link"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+
+    <!-- w5 -->
+    <link name="w5_link">
+      <inertial><origin xyz="0 0 0"/><mass value="1.0"/><inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/></inertial>
+      <collision name="w5_collision">
+        <geometry><mesh filename="${mesh_path}/Torus.003.dae" scale="0.40000 0.40000 0.60000"/></geometry>
+      </collision>
+      <visual name="w5">
+        <material name="Material.004"/>
+        <geometry><mesh filename="${mesh_path}/Torus.003.dae" scale="0.40000 0.40000 0.60000"/></geometry>
+      </visual>
+    </link>
+
+    <joint name="w5_link_joint" type="continuous">
+      <origin xyz="0.72555 0.75000 0.20000"/>
+      <parent link="da_link"/>
+      <child link="w5_link"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+
+    <!-- w6 -->
+    <link name="w6_link">
+      <inertial><origin xyz="0 0 0"/><mass value="1.0"/><inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/></inertial>
+      <collision name="w6_collision">
+        <geometry><mesh filename="${mesh_path}/Torus.001.dae" scale="0.40000 0.40000 0.60000"/></geometry>
+      </collision>
+      <visual name="w6">
+        <material name="Material.004"/>
+        <geometry><mesh filename="${mesh_path}/Torus.001.dae" scale="0.40000 0.40000 0.60000"/></geometry>
+      </visual>
+    </link>
+
+    <joint name="w6_link_joint" type="continuous">
+      <origin xyz="1.28660 1.30000 0.20000"/>
+      <parent link="dg_link"/>
+      <child link="w6_link"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+
+  </xacro:macro>
+
+</robot>

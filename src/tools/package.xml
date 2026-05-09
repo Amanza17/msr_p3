@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>tools</name>
+  <version>0.0.1</version>
+  <description>Analisis de rosbag para práctica 3</description>
+
+  <maintainer email="tu@email.com">Tu Nombre</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclcpp</depend>
+  <depend>geometry_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>python3-matplotlib</exec_depend>
+  <exec_depend>rosbag2_transport</exec_depend>
+  <exec_depend>ros2bag</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

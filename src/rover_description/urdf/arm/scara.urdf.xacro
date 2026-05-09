@@ -1,0 +1,219 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <xacro:property name="mesh_path" value="file://$(find rover_description)/meshes/dae"/>
+  <xacro:macro name="scara" params="parent">
+
+    <link name="scara_base_link">
+      <inertial>
+        <origin xyz="0 0 0.4" rpy="0 0 0"/>
+        <mass value="5.0"/>
+        <inertia ixx="0.4" ixy="0" ixz="0" iyy="0.4" iyz="0" izz="0.1"/>
+      </inertial>
+
+      <collision name="scara_base_collision">
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+          <mesh filename="${mesh_path}/Cylinder.001.dae" scale="0.20000 0.20000 0.87500"/>
+        </geometry>
+      </collision>
+      <visual name="scara_base">
+        <material name="Material.009"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+          <mesh filename="${mesh_path}/Cylinder.001.dae" scale="0.20000 0.20000 0.87500"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <joint name="scara_base_link_joint" type="fixed">
+      <origin rpy="0 0 0" xyz="0.99926 0 1.26299"/>
+      <parent link="${parent}"/>
+      <child link="scara_base_link"/>
+    </joint>
+
+    <link name="brazo1_link">
+      <inertial>
+        <origin xyz="-0.5 0 0" rpy="0 0 0"/>
+        <mass value="3.0"/>
+        <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.35" iyz="0" izz="0.35"/>
+      </inertial>
+
+      <collision name="brazo1_collision">
+        <origin rpy="0 0 0" xyz="-0.49967 0 0"/>
+        <geometry>
+          <mesh filename="${mesh_path}/Cylinder.002.dae" scale="1.00000 0.25000 0.10000"/>
+        </geometry>
+      </collision>
+      <visual name="brazo1">
+        <material name="Material.009"/>
+        <origin rpy="0 0 0" xyz="-0.49967 0 0"/>
+        <geometry>
+          <mesh filename="${mesh_path}/Cylinder.002.dae" scale="1.00000 0.25000 0.10000"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <joint name="brazo1_link_joint" type="revolute">
+      <limit lower="-3.14" upper="3.14" effort="10.0" velocity="1.0"/>
+      <origin rpy="0 0 0" xyz="-0.00355 0 0.85582"/>
+      <parent link="scara_base_link"/>
+      <child link="brazo1_link"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+
+    <link name="brazo2_link">
+      <inertial>
+        <origin xyz="-0.75 0 0" rpy="0 0 0"/>
+        <mass value="3.0"/>
+        <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.55" iyz="0" izz="0.55"/>
+      </inertial>
+
+      <collision name="brazo2_collision">
+        <origin rpy="0 0 0" xyz="-0.77709 0 0"/>
+        <geometry>
+          <mesh filename="${mesh_path}/Cylinder.003.dae" scale="1.00000 0.25000 0.10000"/>
+        </geometry>
+      </collision>
+      <visual name="brazo2">
+        <material name="Material.009"/>
+        <origin rpy="0 0 0" xyz="-0.77709 0 0"/>
+        <geometry>
+          <mesh filename="${mesh_path}/Cylinder.003.dae" scale="1.00000 0.25000 0.10000"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <joint name="brazo2_link_joint" type="revolute">
+      <limit lower="-3.14" upper="3.14" effort="10.0" velocity="1.0"/>
+      <origin rpy="0 0 0" xyz="-1.17506 0 0.20000"/>
+      <parent link="brazo1_link"/>
+      <child link="brazo2_link"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+
+    <link name="paloquebaja_link">
+      <inertial>
+        <origin xyz="0 0 1.6" rpy="0 0 0"/>
+        <mass value="2.0"/>
+        <inertia ixx="1.2" ixy="0" ixz="0" iyy="1.2" iyz="0" izz="0.04"/>
+      </inertial>
+      
+
+      <collision name="paloquebaja_collision">
+        <origin rpy="0 0 0" xyz="0 0 1.62560"/>
+        <geometry>
+          <mesh filename="${mesh_path}/Cylinder.004.dae" scale="0.20000 0.20000 1.87500"/>
+        </geometry>
+      </collision>
+      <visual name="paloquebaja">
+        <material name="Material.008"/>
+        <origin rpy="0 0 0" xyz="0 0 1.62560"/>
+        <geometry>
+          <cylinder radius="0.20000" length="3.75000"/>
+        </geometry>
+      </visual>
+    </link>
+
+      <joint name="paloquebaja_link_joint" type="prismatic">
+      <limit lower="-3.5" upper="0.0" effort="100.0" velocity="1.0"/> 
+      <origin rpy="0 0 0" xyz="-1.17717 0 -0.00019"/>
+      <parent link="brazo2_link"/>
+      <child link="paloquebaja_link"/>
+      <axis xyz="0 0 1"/>
+      <dynamics damping="50.0" friction="1.0"/>
+    </joint>
+
+    <link name="pinza_base_link">
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="1.0"/>
+        <inertia ixx="0.09" ixy="0" ixz="0" iyy="0.025" iyz="0" izz="0.105"/>
+      </inertial>
+
+      <collision name="pinza_base_collision">
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+          <mesh filename="${mesh_path}/Cube.014.dae" scale="0.25000 0.50000 0.05000"/>
+        </geometry>
+      </collision>
+      <visual name="pinza_base">
+        <material name="Material.009"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+          <box size="0.50000 1.00000 0.10000"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <joint name="pinza_base_link_joint" type="revolute">
+      <limit lower="-3.14" upper="3.14" effort="10.0" velocity="1.0"/>
+      <origin rpy="0 0 0" xyz="-0.01452 0 -0.27703"/>
+      <parent link="paloquebaja_link"/>
+      <child link="pinza_base_link"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+
+    <link name="pinza_d_link">
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="0.5"/>
+        <inertia ixx="0.025" ixy="0" ixz="0" iyy="0.025" iyz="0" izz="0.005"/>
+      </inertial>
+
+      <collision name="pinza_d_collision">
+        <origin rpy="1.56686 0 0" xyz="0 0 0"/>
+        <geometry>
+          <mesh filename="${mesh_path}/Cube.016.dae" scale="0.25000 0.05000 0.37500"/>
+        </geometry>
+      </collision>
+      <visual name="pinza_d">
+        <material name="Material.010"/>
+        <origin rpy="1.57080 0 0" xyz="0 0 0"/>
+        <geometry>
+          <box size="0.50000 0.10000 0.75000"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <joint name="pinza_d_link_joint" type="prismatic">
+      <limit lower="0" upper="0.4" effort="100.0" velocity="1.0"/>
+      <origin rpy="-1.57080 0 0" xyz="-0.00181 -0.45392 -0.32430"/>
+      <parent link="pinza_base_link"/>
+      <child link="pinza_d_link"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+
+    <link name="pinza_i_link">
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="0.5"/>
+        <inertia ixx="0.025" ixy="0" ixz="0" iyy="0.025" iyz="0" izz="0.005"/>
+      </inertial>
+
+      <collision name="pinza_i_collision">
+        <origin rpy="-1.58571 0 0" xyz="0 0 0"/>
+        <geometry>
+          <mesh filename="${mesh_path}/Cube.017.dae" scale="0.25000 0.05000 0.37500"/>
+        </geometry>
+      </collision>
+      <visual name="pinza_i">
+        <material name="Material.010"/>
+        <origin rpy="-1.57080 0 0" xyz="0 0 0"/>
+        <geometry>
+          <box size="0.50000 0.10000 0.75000"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <joint name="pinza_i_link_joint" type="prismatic">
+      <limit lower="0" upper="0.4" effort="100.0" velocity="1.0"/>
+      <origin rpy="1.57080 0 0" xyz="-0.00181 0.45041 -0.32430"/>
+      <parent link="pinza_base_link"/>
+      <child link="pinza_i_link"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+
+  </xacro:macro>
+
+</robot>
